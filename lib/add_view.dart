@@ -1,21 +1,21 @@
-import 'package:crypto_wallet/net/flutterfire.dart';
 import 'package:flutter/material.dart';
+import 'firebase/flutterfire.dart';
 
 class AddView extends StatefulWidget {
-  AddView({Key key}) : super(key: key);
+  AddView() : super();
 
   @override
   _AddViewState createState() => _AddViewState();
 }
 
 class _AddViewState extends State<AddView> {
-  List<String> stocks = [
-    "stock_1",
-    "stock_2",
-    "stock_3",
+  List<String> coins = [
+    "bitcoin",
+    "tether",
+    "ethereum",
   ];
 
-  String dropdownValue = "stock_1";
+  String dropdownValue = "bitcoin";
   TextEditingController _amountController = TextEditingController();
 
   @override
@@ -26,7 +26,7 @@ class _AddViewState extends State<AddView> {
         children: [
           DropdownButton(
             value: dropdownValue,
-            onChanged: (String value) {
+            onChanged: (value) {
               setState(() {
                 dropdownValue = value;
               });
@@ -38,8 +38,30 @@ class _AddViewState extends State<AddView> {
               );
             }).toList(),
           ),
-          
-           
+          Container(
+            width: MediaQuery.of(context).size.width / 1.3,
+            child: TextFormField(
+              controller: _amountController,
+              decoration: InputDecoration(
+                labelText: "Coin Amount",
+              ),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width / 1.4,
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,
+            ),
+            child: MaterialButton(
+              onPressed: () async {
+                await addCoin(dropdownValue, _amountController.text);
+                Navigator.of(context).pop();
+              },
+              child: Text("Add"),
+            ),
+          ),
         ],
       ),
     );
