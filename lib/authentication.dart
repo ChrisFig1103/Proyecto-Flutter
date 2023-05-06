@@ -1,12 +1,11 @@
-import 'package:proyecto/firebase/flutterfire.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
+import 'firebase/flutterfire.dart';
 import 'home_view.dart';
 
 
 class Authentication extends StatefulWidget {
-  Authentication({Key key}) : super(key: key);
-
+  Authentication() : super();
   @override
   _AuthenticationState createState() => _AuthenticationState();
 }
